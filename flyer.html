@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Flyer asesorías</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: #0E1B2C;
+    color: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+  }
+  .glow {
+    position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    right: -300px; top: -320px;
+    background: radial-gradient(circle, rgba(255,200,69,.22) 0%, rgba(255,200,69,0) 68%);
+  }
+  .wrap { position: relative; padding: 80px 88px 72px; height: 100%; display: flex; flex-direction: column; }
+
+  .tag {
+    align-self: flex-start;
+    background: #FFC845; color: #0E1B2C;
+    font-weight: 700; font-size: 25px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 10px 24px; border-radius: 999px;
+  }
+  h1 { font-size: 104px; line-height: .98; font-weight: 800; letter-spacing: -.02em; margin-top: 30px; }
+  h1 span { color: #FFC845; }
+  .sub { font-size: 34px; color: #B9C6D8; margin-top: 20px; }
+
+  .days { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .day {
+    background: #16263B; border: 2px solid #26405C; border-radius: 28px;
+    padding: 22px 0 20px; text-align: center;
+  }
+  .dw { font-size: 26px; text-transform: uppercase; letter-spacing: .14em; color: #FFC845; font-weight: 700; }
+  .dn { font-size: 84px; font-weight: 800; line-height: 1; margin-top: 6px; }
+  .dm { font-size: 26px; color: #B9C6D8; margin-top: 4px; text-transform: uppercase; letter-spacing: .12em; }
+
+  .info { margin-top: 38px; display: flex; flex-direction: column; gap: 22px; }
+  .row { display: flex; align-items: center; gap: 26px; }
+  .ic {
+    flex: none; width: 64px; height: 64px; border-radius: 18px;
+    background: #16263B; border: 2px solid #26405C;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ic svg { width: 32px; height: 32px; stroke: #FFC845; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .row p { font-size: 33px; line-height: 1.2; }
+  .row p b { font-weight: 700; }
+  .row p small { display: block; font-size: 25px; color: #B9C6D8; margin-top: 2px; }
+
+  .cta {
+    margin-top: auto;
+    background: #FFC845; color: #0E1B2C; border-radius: 30px;
+    padding: 30px 40px;
+  }
+  .cta h2 { font-size: 40px; font-weight: 800; line-height: 1.1; }
+  .cta p { font-size: 27px; margin-top: 10px; line-height: 1.3; }
+  .code {
+    margin-top: 22px; text-align: center;
+    font-family: Consolas, "Cascadia Mono", monospace; font-size: 26px; color: #6F86A3;
+  }
+  .code .k { color: #FFC845; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="tag">Rumbo al examen</div>
+    <h1>Asesorías de <span>Programación</span></h1>
+    <p class="sub">Resuelve tus dudas con apoyo personalizado.</p>
+
+    <div class="days">
+      <div class="day"><div class="dw">Lunes</div><div class="dn">19</div><div class="dm">octubre</div></div>
+      <div class="day"><div class="dw">Martes</div><div class="dn">20</div><div class="dm">octubre</div></div>
+      <div class="day"><div class="dw">Miércoles</div><div class="dn">21</div><div class="dm">octubre</div></div>
+    </div>
+
+    <div class="info">
+      <div class="row">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <p><b>11:00 – 12:00 h</b><small>Los tres días · ven al que mejor te acomode</small></p>
+      </div>
+      <div class="row">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+        <p><b>Aula LSIM</b><small>Primer piso PEI · Laboratorio de computadoras</small></p>
+      </div>
+      <div class="row">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 4.9"/></svg></div>
+        <p><b>Máximo 10 estudiantes por sesión</b><small>Con estudiantes de semestres avanzados y tu docente</small></p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2>Inscríbete: el cupo es limitado</h2>
+      <p>Cuando una sesión se llena, ya no aparece. Trae tu código o el ejercicio que no te sale.</p>
+    </div>
+    <div class="code"><span class="k">while</span> dudas &gt; 0: asesoria()</div>
+  </div>
+</body>
+</html>

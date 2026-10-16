@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Imagen para compartir</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; background: #0E1B2C; color: #FFFFFF; overflow: hidden; position: relative; }
+  .glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; right: -260px; top: -300px;
+    background: radial-gradient(circle, rgba(255,200,69,.22) 0%, rgba(255,200,69,0) 68%); }
+  .wrap { position: relative; padding: 70px 80px; height: 100%; display: flex; flex-direction: column; }
+  .tag { align-self: flex-start; background: #FFC845; color: #0E1B2C; font-weight: 700; font-size: 22px;
+    letter-spacing: .1em; text-transform: uppercase; padding: 8px 20px; border-radius: 999px; }
+  h1 { font-size: 92px; line-height: 1; font-weight: 800; letter-spacing: -.02em; margin-top: 30px; }
+  h1 span { color: #FFC845; }
+  .info { margin-top: auto; display: flex; gap: 48px; font-size: 30px; }
+  .info b { display: block; font-size: 20px; color: #FFC845; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="tag">Rumbo al examen</div>
+    <h1>Asesorías de<br><span>Programación</span></h1>
+    <div class="info">
+      <p><b>Días</b>Lun 19 · Mar 20 · Mié 21 oct</p>
+      <p><b>Hora</b>11:00 a 12:00</p>
+      <p><b>Lugar</b>Aula LSIM</p>
+    </div>
+  </div>
+</body>
+</html>

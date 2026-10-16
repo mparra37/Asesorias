@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asesorías de Programación</title>
+<meta name="description" content="Asesorías rumbo al examen: lunes 19, martes 20 y miércoles 21 de octubre, 11:00 a 12:00, Aula LSIM. Cupo de 10 por sesión.">
+
+<!-- Vista previa al compartir (WhatsApp, Teams). Cambia TU-USUARIO/TU-REPO por la dirección real del sitio. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Asesorías de Programación · Rumbo al examen">
+<meta property="og:description" content="Lun 19, mar 20 y mié 21 de octubre · 11:00 a 12:00 · Aula LSIM. Cupo de 10 por sesión, inscríbete.">
+<meta property="og:image" content="https://TU-USUARIO.github.io/TU-REPO/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="theme-color" content="#0E1B2C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E1B2C'/%3E%3Cpath d='M24 22 14 32l10 10M40 22l10 10-10 10' stroke='%23FFC845' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F4F5F7;
+    --text: #0E1B2C;
+    --muted: #4A5A6E;
+    --line: #DDE2E8;
+    --line-strong: #8A97A8;
+    --primary: #0E1B2C;
+    --on-primary: #FFFFFF;
+    --accent: #FFC845;
+    --on-accent: #0E1B2C;
+    --ok: #1D7A4B;
+    --error: #B42318;
+    --focus: #1F5FA8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1B2C;
+      --surface: #16263B;
+      --text: #F3F5F8;
+      --muted: #B9C6D8;
+      --line: #26405C;
+      --line-strong: #5E7591;
+      --primary: #FFC845;
+      --on-primary: #0E1B2C;
+      --ok: #5BD39A;
+      --error: #FF8A80;
+      --focus: #8AB4F8;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 0 20px 48px; }
+  h1, h2, h3 { line-height: 1.15; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+  .muted { color: var(--muted); }
+
+  .demo {
+    margin: 16px 0 0; padding: 10px 14px; border-radius: 10px;
+    border: 1.5px dashed var(--line-strong); color: var(--muted); font-size: 15px;
+  }
+
+  /* Encabezado */
+  .hero { padding: 48px 0 32px; }
+  .tag {
+    display: inline-block; background: var(--accent); color: var(--on-accent);
+    font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px;
+  }
+  h1 { font-size: clamp(2.3rem, 9vw, 3.5rem); font-weight: 800; letter-spacing: -.02em; margin-top: 18px; }
+  .lead { font-size: 19px; color: var(--muted); margin-top: 14px; max-width: 34ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 22px; border-radius: 12px;
+    font: inherit; font-weight: 650; text-decoration: none; cursor: pointer;
+    border: 1.5px solid var(--line-strong); background: transparent; color: var(--text);
+  }
+  .btn.primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .btn.block { width: 100%; }
+  .btn:disabled { opacity: .6; cursor: progress; }
+  .btn svg { width: 20px; height: 20px; }
+
+  /* Datos clave */
+  .facts { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { font-weight: 700; color: var(--muted); font-size: 15px; padding-top: 2px; }
+  .facts dd { margin: 0; font-weight: 600; }
+  .facts dd span { display: block; font-weight: 400; color: var(--muted); font-size: 16px; }
+
+  section { margin-top: 40px; }
+  h2 { font-size: 26px; font-weight: 750; letter-spacing: -.01em; }
+  h2 + p { margin-top: 8px; }
+
+  .puntos {
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 18px; padding: 22px 22px 24px;
+  }
+  .puntos h2 { font-size: 23px; }
+  .puntos p { margin-top: 8px; }
+
+  .tips { list-style: none; counter-reset: tip; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; }
+  .tips li { counter-increment: tip; display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+  .tips li::before {
+    content: counter(tip); width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 700; font-size: 15px;
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .tips b { display: block; }
+  .tips span { color: var(--muted); }
+
+  /* Formulario */
+  form { margin-top: 22px; display: grid; gap: 22px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend, label.lbl { display: block; font-weight: 650; margin-bottom: 8px; padding: 0; }
+  .opt { font-weight: 400; color: var(--muted); }
+  .hint { color: var(--muted); font-size: 15px; margin: -4px 0 8px; }
+
+  input[type=text], select, textarea {
+    width: 100%; min-height: 48px; padding: 10px 14px;
+    font: inherit; color: var(--text); background: var(--bg);
+    border: 1.5px solid var(--line-strong); border-radius: 10px;
+  }
+  textarea { resize: vertical; min-height: 96px; }
+  [aria-invalid=true] { border-color: var(--error); }
+  .error { color: var(--error); font-size: 15px; font-weight: 600; margin-top: 6px; }
+  .error:empty { display: none; }
+
+  .slots { display: grid; gap: 10px; }
+  .slot {
+    display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 14px;
+    min-height: 60px; padding: 10px 16px; border-radius: 12px; cursor: pointer;
+    border: 1.5px solid var(--line-strong);
+  }
+  .slot:has(input:checked) { border-color: var(--primary); box-shadow: inset 0 0 0 1.5px var(--primary); background: var(--surface); }
+  .slot:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .slot input { width: 22px; height: 22px; margin: 0; accent-color: var(--primary); }
+  .slot b { font-weight: 650; }
+  .slot small { display: block; color: var(--muted); font-size: 15px; }
+  .cupo { font-size: 15px; font-weight: 650; color: var(--muted); white-space: nowrap; }
+  .slot.pocos .cupo { color: var(--text); background: var(--accent); color: var(--on-accent); padding: 3px 10px; border-radius: 999px; }
+  .slot.off { cursor: not-allowed; border-style: dashed; border-color: var(--line); }
+  .slot.off b, .slot.off small { color: var(--muted); }
+  .slot.off .cupo { color: var(--muted); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
+    border: 1.5px solid var(--line-strong); border-radius: 999px; font-size: 16px;
+  }
+  .chip input:checked + span { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .estado { font-weight: 600; }
+  .estado.mal { color: var(--error); }
+
+  /* Confirmación */
+  .exito { margin-top: 22px; border: 1.5px solid var(--ok); border-radius: 18px; padding: 24px 22px; }
+  .exito:focus { outline: none; }
+  .exito h3 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
+  .exito h3 svg { width: 28px; height: 28px; flex: none; color: var(--ok); }
+  .exito ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .exito li { padding: 12px 14px; background: var(--surface); border-radius: 10px; }
+  .exito li a { font-size: 15px; font-weight: 600; }
+  .exito .actions { margin-top: 18px; }
+  .linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; min-height: 44px; }
+
+  footer { max-width: 640px; margin: 0 auto; padding: 28px 20px 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+  footer .actions { margin-top: 16px; }
+
+  dialog { border: 0; border-radius: 18px; padding: 28px; max-width: min(92vw, 420px); background: var(--bg); color: var(--text); text-align: center; }
+  dialog::backdrop { background: rgba(8, 15, 26, .7); }
+  .qr { background: #FFFFFF; border-radius: 12px; padding: 14px; margin: 18px auto; width: min(100%, 320px); }
+  .qr img { width: 100%; height: auto; image-rendering: pixelated; display: block; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    background: var(--text); color: var(--bg); padding: 12px 18px; border-radius: 12px;
+    font-weight: 600; font-size: 15px; max-width: calc(100vw - 32px);
+  }
+  .toast:empty { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <p class="demo" id="demo" hidden>Modo demostración: los lugares son de ejemplo y las inscripciones no se guardan. Falta pegar la URL del backend en <code>CONFIG.API_URL</code>.</p>
+
+  <header class="hero">
+    <span class="tag">Rumbo al examen</span>
+    <h1>Asesorías de Programación</h1>
+    <p class="lead">Resuelve tus dudas con estudiantes de ITC de semestres avanzados y tu docente.</p>
+    <div class="actions">
+      <a class="btn primary" href="#inscripcion">Inscribirme</a>
+      <button class="btn" type="button" data-compartir>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+        Compartir
+      </button>
+    </div>
+  </header>
+
+  <dl class="facts">
+    <div><dt>Cuándo</dt><dd>Lunes 19, martes 20 y miércoles 21 de octubre<span>11:00 a 12:00 · ven el día que te acomode</span></dd></div>
+    <div><dt>Dónde</dt><dd>Aula LSIM<span>Primer piso PEI · laboratorio de computadoras</span></dd></div>
+    <div><dt>Cupo</dt><dd>10 estudiantes por sesión<span>Inscripción obligatoria</span></dd></div>
+  </dl>
+
+  <section class="puntos" aria-labelledby="t-puntos">
+    <h2 id="t-puntos">Asistir te da puntos de apoyo para el examen</h2>
+    <p>Los puntos cuentan por asistencia: se pasa lista en el aula. Inscribirte no basta, hay que ir.</p>
+  </section>
+
+  <section aria-labelledby="t-mano">
+    <h2 id="t-mano">El examen es a mano</h2>
+    <p class="muted">Aunque la asesoría es en laboratorio, practica como en el examen.</p>
+    <ol class="tips">
+      <li><div><b>Trae cuaderno y lápiz.</b><span>Practicarás en papel, igual que el día del examen.</span></div></li>
+      <li><div><b>Escribe el código sin computadora.</b><span>Cuida la sangría, los dos puntos y los paréntesis.</span></div></li>
+      <li><div><b>Haz pruebas de escritorio.</b><span>Sigue el programa línea por línea y anota cómo cambian las variables.</span></div></li>
+      <li><div><b>Llega con una duda concreta.</b><span>Un ejercicio que no te salió rinde más que empezar de cero.</span></div></li>
+    </ol>
+  </section>
+
+  <section id="inscripcion" aria-labelledby="t-inscripcion">
+    <h2 id="t-inscripcion">Inscríbete</h2>
+    <p class="muted">Toma menos de un minuto. Cuando un día se llena, ya no se puede elegir.</p>
+
+    <form id="form" novalidate>
+      <fieldset aria-describedby="e-sesiones">
+        <legend>¿Qué día vas a ir? <span class="opt">Puedes elegir más de uno</span></legend>
+        <div class="slots" id="slots"></div>
+        <p class="hint" id="aviso-cupos" hidden style="margin:10px 0 0">No pudimos consultar los lugares disponibles. Igual puedes inscribirte y te avisamos si un día ya está lleno.</p>
+        <p class="error" id="e-sesiones"></p>
+      </fieldset>
+
+      <div>
+        <label class="lbl" for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" aria-describedby="e-nombre">
+        <p class="error" id="e-nombre"></p>
+      </div>
+
+      <div>
+        <label class="lbl" for="matricula">Matrícula</label>
+        <p class="hint" id="h-matricula">Ejemplo: A01234567</p>
+        <input type="text" id="matricula" name="matricula" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9" aria-describedby="h-matricula e-matricula">
+        <p class="error" id="e-matricula"></p>
+      </div>
+
+      <div>
+        <label class="lbl" for="grupo">Grupo</label>
+        <select id="grupo" name="grupo" aria-describedby="e-grupo"><option value="">Elige tu grupo</option></select>
+        <p class="error" id="e-grupo"></p>
+      </div>
+
+      <fieldset>
+        <legend>¿En qué tema necesitas ayuda? <span class="opt">Opcional</span></legend>
+        <div class="chips" id="temas"></div>
+      </fieldset>
+
+      <div>
+        <label class="lbl" for="duda">¿Qué ejercicio o duda traes? <span class="opt">Opcional</span></label>
+        <textarea id="duda" name="duda" maxlength="500" rows="3"></textarea>
+      </div>
+
+      <button class="btn primary block" type="submit" id="enviar">Apartar mi lugar</button>
+      <p class="estado" id="estado" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="exito" id="exito" tabindex="-1" hidden>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><span id="exito-titulo">¡Listo, ya tienes lugar!</span></h3>
+      <ul id="exito-lista"></ul>
+      <p style="margin-top:14px">Aula LSIM, primer piso PEI. Trae cuaderno y lápiz.</p>
+      <div class="actions">
+        <button class="btn" type="button" id="ics">Agregar a mi calendario</button>
+        <button class="btn" type="button" data-compartir>Compartir con mi grupo</button>
+      </div>
+      <button class="linkbtn" type="button" id="otra">Inscribir a otra persona</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>¿Te inscribiste y ya no puedes ir? Avísale a tu docente para liberar tu lugar.</p>
+  <div class="actions">
+    <a class="btn" id="whatsapp" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+    <button class="btn" type="button" id="ver-qr">Mostrar código QR</button>
+  </div>
+</footer>
+
+<dialog id="dialogo-qr" aria-labelledby="t-qr">
+  <h2 id="t-qr">Escanea para inscribirte</h2>
+  <div class="qr" id="qr"></div>
+  <p class="muted" id="qr-url" style="word-break:break-all;font-size:15px"></p>
+  <form method="dialog" style="margin-top:18px"><button class="btn primary block">Cerrar</button></form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* ================= Configuración ================= */
+  const CONFIG = {
+    // URL de la aplicación web de Apps Script (termina en /exec). Vacía = modo demostración.
+    API_URL: 'https://script.google.com/macros/s/AKfycbz9h2dXVghyF95UxKNr3pDEWZe0UTeoWnFzVXOqFu1o7S9qvsf2OvzwXX0Tjt6qjxmbqA/exec',
+    CUPO: 10,
+    GRUPOS: ['Grupo 1', 'Grupo 2', 'Grupo 3', 'Grupo 4'],
+    TEMAS: ['Funciones', 'Condicionales', 'Ciclo for', 'Ciclo while', 'Ciclos anidados', 'Listas', 'Tuplas y diccionarios', 'Pruebas de escritorio'],
+  };
+
+  // Mismos id que en el backend. Hora del centro de México (UTC-6).
+  const SESIONES = [
+    { id: 'lun', dia: 'Lunes', fecha: '19 de octubre', inicio: '2026-10-19T11:00:00-06:00', fin: '2026-10-19T12:00:00-06:00' },
+    { id: 'mar', dia: 'Martes', fecha: '20 de octubre', inicio: '2026-10-20T11:00:00-06:00', fin: '2026-10-20T12:00:00-06:00' },
+    { id: 'mie', dia: 'Miércoles', fecha: '21 de octubre', inicio: '2026-10-21T11:00:00-06:00', fin: '2026-10-21T12:00:00-06:00' },
+  ];
+  const LUGAR = 'Aula LSIM, primer piso PEI (laboratorio de computadoras)';
+  const MENSAJE = 'Asesorías de Programación rumbo al examen: lun 19, mar 20 y mié 21 de octubre, 11:00 a 12:00 en el Aula LSIM. Cupo de 10 por sesión, inscríbete aquí:';
+  const QR_LIB = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+
+  /* ================= Utilidades ================= */
+  const DEMO = !CONFIG.API_URL;
+  const DEMO_ESTADO = [
+    { id: 'lun', disponibles: 6 }, { id: 'mar', disponibles: 2 }, { id: 'mie', disponibles: 0 },
+  ];
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const urlSitio = () => location.href.split('#')[0].split('?')[0];
+  const form = $('#form');
+
+  function avisar(texto) {
+    const t = $('#toast');
+    t.textContent = texto;
+    clearTimeout(avisar.timer);
+    avisar.timer = setTimeout(() => (t.textContent = ''), 3500);
+  }
+
+  /* ================= Días y lugares ================= */
+  $('#slots').innerHTML = SESIONES.map(s => `
+    <label class="slot" data-id="${s.id}">
+      <input type="checkbox" name="sesiones" value="${s.id}">
+      <span><b>${s.dia} ${s.fecha.split(' ')[0]}</b><small>${s.fecha.replace(/^\d+ de /, '')} · 11:00 a 12:00</small></span>
+      <span class="cupo"></span>
+    </label>`).join('');
+
+  $('#grupo').insertAdjacentHTML('beforeend', CONFIG.GRUPOS.map(g => `<option>${g}</option>`).join(''));
+  $('#temas').innerHTML = CONFIG.TEMAS.map(t =>
+    `<label class="chip"><input type="checkbox" name="temas" value="${t}"><span>${t}</span></label>`).join('');
+
+  function pintarCupos(lista) {
+    const porId = Object.fromEntries((lista || []).map(s => [s.id, s]));
+    SESIONES.forEach(s => {
+      const slot = $(`.slot[data-id="${s.id}"]`);
+      const input = slot.querySelector('input');
+      const info = porId[s.id];
+      const cerrada = Date.now() >= Date.parse(s.inicio) || (info && info.cerrada);
+      const n = info ? info.disponibles : null;
+      let texto = '', clase = '';
+      if (cerrada) { texto = 'Cerrada'; clase = 'off'; }
+      else if (n === 0) { texto = 'Llena'; clase = 'off'; }
+      else if (n !== null && n <= 3) { texto = n === 1 ? 'Queda 1 lugar' : `Quedan ${n}`; clase = 'pocos'; }
+      else if (n !== null) { texto = `${n} lugares`; }
+      slot.querySelector('.cupo').textContent = texto;
+      slot.classList.toggle('off', clase === 'off');
+      slot.classList.toggle('pocos', clase === 'pocos');
+      input.disabled = clase === 'off';
+      if (input.disabled) input.checked = false;
+    });
+  }
+
+  async function consultarCupos() {
+    if (DEMO) return pintarCupos(DEMO_ESTADO);
+    try {
+      const r = await fetch(CONFIG.API_URL, { cache: 'no-store' });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error);
+      pintarCupos(data.sesiones);
+      $('#aviso-cupos').hidden = true;
+    } catch (e) {
+      pintarCupos(null);
+      $('#aviso-cupos').hidden = false;
+    }
+  }
+
+  /* ================= Validación ================= */
+  const seleccionadas = () => $$('input[name=sesiones]:checked').map(i => i.value);
+  const REGLAS = {
+    sesiones: () => seleccionadas().length ? '' : 'Elige al menos un día.',
+    nombre: () => $('#nombre').value.trim().length >= 3 ? '' : 'Escribe tu nombre completo.',
+    matricula: () => /^A\d{8}$/i.test($('#matricula').value.trim()) ? '' : 'Escribe tu matrícula completa, por ejemplo A01234567.',
+    grupo: () => $('#grupo').value ? '' : 'Elige tu grupo.',
+  };
+  let intentoEnviar = false;
+
+  function validar(campo) {
+    const msg = REGLAS[campo]();
+    $(`#e-${campo}`).textContent = msg;
+    const control = campo === 'sesiones' ? null : $(`#${campo}`);
+    if (control) control.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+
+  function primerInvalido() {
+    let primero = null;
+    for (const campo of Object.keys(REGLAS)) {
+      if (!validar(campo) && !primero) {
+        primero = campo === 'sesiones' ? $('input[name=sesiones]:not(:disabled)') || $('#slots') : $(`#${campo}`);
+      }
+    }
+    return primero;
+  }
+
+  // Se valida al salir del campo solo después del primer intento, para no regañar antes de tiempo.
+  ['nombre', 'matricula', 'grupo'].forEach(campo => {
+    $(`#${campo}`).addEventListener(campo === 'grupo' ? 'change' : 'blur', () => intentoEnviar && validar(campo));
+  });
+  $('#slots').addEventListener('change', () => intentoEnviar && validar('sesiones'));
+  $('#matricula').addEventListener('blur', e => (e.target.value = e.target.value.trim().toUpperCase()));
+
+  /* ================= Envío ================= */
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    intentoEnviar = true;
+    const estado = $('#estado');
+    estado.textContent = '';
+    estado.classList.remove('mal');
+
+    const invalido = primerInvalido();
+    if (invalido) { invalido.focus(); return; }
+
+    const datos = {
+      sesiones: seleccionadas(),
+      nombre: $('#nombre').value.trim(),
+      matricula: $('#matricula').value.trim().toUpperCase(),
+      grupo: $('#grupo').value,
+      temas: $$('input[name=temas]:checked').map(i => i.value),
+      duda: $('#duda').value.trim(),
+    };
+
+    const boton = $('#enviar');
+    boton.disabled = true;
+    boton.textContent = 'Apartando tu lugar…';
+    try {
+      const res = DEMO
+        ? await new Promise(ok => setTimeout(() => ok({ ok: true }), 700))
+        : await fetch(CONFIG.API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(datos),
+          }).then(r => r.json());
+      if (res.sesiones) pintarCupos(res.sesiones);
+      if (!res.ok) {
+        estado.textContent = res.error || 'No se pudo completar la inscripción.';
+        estado.classList.add('mal');
+        return;
+      }
+      mostrarExito(datos);
+    } catch (err) {
+      estado.textContent = 'No se pudo enviar. Revisa tu conexión e intenta de nuevo.';
+      estado.classList.add('mal');
+    } finally {
+      boton.disabled = false;
+      boton.textContent = 'Apartar mi lugar';
+    }
+  });
+
+  /* ================= Confirmación y calendario ================= */
+  let ultimas = [];
+  const utc = iso => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+
+  function linkGoogle(s) {
+    const p = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: 'Asesoría de Programación',
+      dates: `${utc(s.inicio)}/${utc(s.fin)}`,
+      location: LUGAR,
+      details: 'Trae cuaderno, lápiz y tu duda concreta. El examen es a mano.',
+    });
+    return `https://calendar.google.com/calendar/render?${p}`;
+  }
+
+  function mostrarExito(datos) {
+    ultimas = SESIONES.filter(s => datos.sesiones.includes(s.id));
+    $('#exito-titulo').textContent = `¡Listo, ${datos.nombre.split(/\s+/)[0]}! Ya tienes lugar`;
+    const lista = $('#exito-lista');
+    lista.innerHTML = '';
+    ultimas.forEach(s => {
+      const li = document.createElement('li');
+      li.innerHTML = `<b>${s.dia} ${s.fecha}</b> · 11:00 a 12:00<br><a target="_blank" rel="noopener">Agregar a Google Calendar</a>`;
+      li.querySelector('a').href = linkGoogle(s);
+      lista.append(li);
+    });
+    form.hidden = true;
+    $('#exito').hidden = false;
+    $('#exito').focus();
+    consultarCupos();
+  }
+
+  $('#ics').addEventListener('click', () => {
+    const esc = t => t.replace(/[\\,;]/g, m => '\\' + m);
+    const ahora = utc(new Date().toISOString());
+    const eventos = ultimas.map(s => [
+      'BEGIN:VEVENT',
+      `UID:asesoria-${s.id}-2026@asesorias-programacion`,
+      `DTSTAMP:${ahora}`,
+      `DTSTART:${utc(s.inicio)}`,
+      `DTEND:${utc(s.fin)}`,
+      'SUMMARY:Asesoría de Programación',
+      `LOCATION:${esc(LUGAR)}`,
+      `DESCRIPTION:${esc('Trae cuaderno, lápiz y tu duda concreta. El examen es a mano.')}`,
+      'END:VEVENT',
+    ].join('\r\n'));
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Asesorias Programacion//ES', ...eventos, 'END:VCALENDAR'].join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    a.download = 'asesorias-programacion.ics';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  $('#otra').addEventListener('click', () => {
+    form.reset();
+    intentoEnviar = false;
+    $$('.error').forEach(p => (p.textContent = ''));
+    $$('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+    $('#estado').textContent = '';
+    $('#exito').hidden = true;
+    form.hidden = false;
+    consultarCupos().then(() => $('input[name=sesiones]:not(:disabled)')?.focus());
+  });
+
+  /* ================= Compartir ================= */
+  async function compartir() {
+    const url = urlSitio();
+    if (navigator.share) {
+      try { await navigator.share({ title: document.title, text: MENSAJE, url }); } catch (e) {}
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${MENSAJE} ${url}`);
+      avisar('Mensaje y enlace copiados. Pégalos en el chat de tu grupo.');
+    } catch (e) {
+      avisar(url);
+    }
+  }
+  $$('[data-compartir]').forEach(b => b.addEventListener('click', compartir));
+  $('#whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(`${MENSAJE} ${urlSitio()}`);
+
+  function cargarScript(src) {
+    return new Promise((ok, mal) => {
+      const s = document.createElement('script');
+      s.src = src; s.onload = ok; s.onerror = mal;
+      document.head.append(s);
+    });
+  }
+
+  $('#ver-qr').addEventListener('click', async () => {
+    const url = urlSitio();
+    try {
+      if (!window.qrcode) await cargarScript(QR_LIB);
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      $('#qr').innerHTML = `<img alt="Código QR del sitio de inscripción" src="${qr.createDataURL(10, 0)}">`;
+    } catch (e) {
+      $('#qr').textContent = 'No se pudo generar el código QR.';
+    }
+    $('#qr-url').textContent = url;
+    $('#dialogo-qr').showModal();
+  });
+
+  /* ================= Inicio ================= */
+  $('#demo').hidden = !DEMO;
+  consultarCupos();
+  document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && !form.hidden && consultarCupos());
+</script>
+</body>
+</html>
