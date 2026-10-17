@@ -34,11 +34,7 @@ const COL_ASISTIO = 7;
 
 function configurar() {
   const libro = SpreadsheetApp.create('Inscritos · Asesorías de Programación');
-  const hoja = libro.getSheets()[0];
-  hoja.setName('Inscritos');
-  hoja.appendRow(ENCABEZADOS);
-  hoja.setFrozenRows(1);
-  hoja.getRange(1, 1, 1, ENCABEZADOS.length).setFontWeight('bold');
+  crearPestana(libro.getSheets()[0].setName('Inscritos'));
   PropertiesService.getScriptProperties().setProperty('hojaId', libro.getId());
   Logger.log('Hoja de inscritos: ' + libro.getUrl());
 }
@@ -105,10 +101,20 @@ function validar(d) {
   return '';
 }
 
+// Usa la hoja creada por configurar o, si el script se abrió desde una hoja
+// (Extensiones → Apps Script), esa misma hoja. La pestaña "Inscritos" se crea sola.
 function obtenerHoja() {
   const id = PropertiesService.getScriptProperties().getProperty('hojaId');
-  if (!id) throw new Error('Primero ejecuta la función configurar.');
-  return SpreadsheetApp.openById(id).getSheetByName('Inscritos');
+  const libro = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!libro) throw new Error('Primero ejecuta la función configurar.');
+  return libro.getSheetByName('Inscritos') || crearPestana(libro.insertSheet('Inscritos'));
+}
+
+function crearPestana(hoja) {
+  hoja.appendRow(ENCABEZADOS);
+  hoja.setFrozenRows(1);
+  hoja.getRange(1, 1, 1, ENCABEZADOS.length).setFontWeight('bold');
+  return hoja;
 }
 
 function leerFilas(hoja) {
