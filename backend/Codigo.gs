@@ -27,10 +27,10 @@ const SESIONES = [
   { id: 'mie', nombre: 'Miércoles 21 de octubre', inicio: '2026-10-21T11:00:00-06:00' },
 ];
 
-const ENCABEZADOS = ['Registro', 'Sesión', 'Nombre', 'Matrícula', 'Grupo', 'Temas', 'Duda', 'Asistió'];
+const ENCABEZADOS = ['Registro', 'Sesión', 'Nombre', 'Matrícula', 'Temas', 'Duda', 'Asistió'];
 const COL_SESION = 2;
 const COL_MATRICULA = 4;
-const COL_ASISTIO = 8;
+const COL_ASISTIO = 7;
 
 function configurar() {
   const libro = SpreadsheetApp.create('Inscritos · Asesorías de Programación');
@@ -44,7 +44,11 @@ function configurar() {
 }
 
 function doGet() {
-  return responder({ ok: true, cupo: CUPO, sesiones: estado(leerFilas(obtenerHoja())) });
+  try {
+    return responder({ ok: true, cupo: CUPO, sesiones: estado(leerFilas(obtenerHoja())) });
+  } catch (err) {
+    return responder({ ok: false, error: err.message });
+  }
 }
 
 function doPost(e) {
@@ -67,28 +71,22 @@ function doPost(e) {
     const hoja = obtenerHoja();
     const filas = leerFilas(hoja);
     const matricula = datos.matricula.trim().toUpperCase();
-    const ahora = Date.now();
+    const s = SESIONES.find(x => x.id === datos.sesion);
+    const previa = filas.find(f => f.matricula === matricula);
 
-    for (const id of datos.sesiones) {
-      const s = SESIONES.find(x => x.id === id);
-      const rechazo =
-        ahora >= Date.parse(s.inicio) ? `La sesión del ${s.nombre} ya cerró.` :
-        filas.some(f => f.sesion === s.nombre && f.matricula === matricula) ? `Ya tienes lugar el ${s.nombre}.` :
-        contar(filas, s.nombre) >= CUPO ? `La sesión del ${s.nombre} se acaba de llenar. Elige otro día.` :
-        '';
-      if (rechazo) return responder({ ok: false, error: rechazo, sesiones: estado(filas) });
-    }
+    // Cada estudiante aparta un solo día.
+    const rechazo =
+      Date.now() >= Date.parse(s.inicio) ? `La sesión del ${s.nombre} ya cerró.` :
+      previa ? `Ya tienes lugar el ${previa.sesion}. Solo se puede apartar un día.` :
+      contar(filas, s.nombre) >= CUPO ? `La sesión del ${s.nombre} se acaba de llenar. Elige otro día.` :
+      '';
+    if (rechazo) return responder({ ok: false, error: rechazo, sesiones: estado(filas) });
 
-    const registro = new Date();
-    const temas = (datos.temas || []).join(', ');
-    datos.sesiones.forEach(id => {
-      const s = SESIONES.find(x => x.id === id);
-      hoja.appendRow([
-        registro, s.nombre, limpiar(datos.nombre), matricula,
-        limpiar(datos.grupo), limpiar(temas), limpiar(datos.duda || ''), false,
-      ]);
-      hoja.getRange(hoja.getLastRow(), COL_ASISTIO).insertCheckboxes();
-    });
+    hoja.appendRow([
+      new Date(), s.nombre, limpiar(datos.nombre), matricula,
+      limpiar((datos.temas || []).join(', ')), limpiar(datos.duda || ''), false,
+    ]);
+    hoja.getRange(hoja.getLastRow(), COL_ASISTIO).insertCheckboxes();
     SpreadsheetApp.flush();
 
     return responder({ ok: true, sesiones: estado(leerFilas(hoja)) });
@@ -99,12 +97,9 @@ function doPost(e) {
 
 function validar(d) {
   if (!d || typeof d !== 'object') return 'Inscripción incompleta.';
-  if (!Array.isArray(d.sesiones) || d.sesiones.length === 0) return 'Elige al menos un día.';
-  if (new Set(d.sesiones).size !== d.sesiones.length) return 'Elegiste un día dos veces.';
-  if (!d.sesiones.every(id => SESIONES.some(s => s.id === id))) return 'Ese día no existe.';
+  if (!SESIONES.some(s => s.id === d.sesion)) return 'Elige un día.';
   if (typeof d.nombre !== 'string' || d.nombre.trim().length < 3 || d.nombre.length > 80) return 'Escribe tu nombre completo.';
   if (typeof d.matricula !== 'string' || !/^A\d{8}$/i.test(d.matricula.trim())) return 'Revisa tu matrícula (ejemplo: A01234567).';
-  if (typeof d.grupo !== 'string' || !d.grupo.trim() || d.grupo.length > 40) return 'Elige tu grupo.';
   if (d.temas && (!Array.isArray(d.temas) || d.temas.length > 12 || d.temas.some(t => typeof t !== 'string' || t.length > 60))) return 'Revisa los temas.';
   if (d.duda && (typeof d.duda !== 'string' || d.duda.length > 500)) return 'La duda es demasiado larga (máximo 500 caracteres).';
   return '';

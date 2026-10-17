@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asesorías de Programación</title>
-<meta name="description" content="Asesorías rumbo al examen: lunes 19, martes 20 y miércoles 21 de octubre, 11:00 a 12:00, Aula LSIM. Cupo de 10 por sesión.">
+<meta name="description" content="Asesorías rumbo al examen: lunes 19, martes 20 o miércoles 21 de octubre, 11:00 a 12:00, Aula LSIM. Cupo de 10 por sesión.">
 
-<!-- Vista previa al compartir (WhatsApp, Teams). Cambia TU-USUARIO/TU-REPO por la dirección real del sitio. -->
+<!-- Vista previa al compartir (WhatsApp, Teams) -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://mparra37.github.io/Asesorias/">
 <meta property="og:title" content="Asesorías de Programación · Rumbo al examen">
-<meta property="og:description" content="Lun 19, mar 20 y mié 21 de octubre · 11:00 a 12:00 · Aula LSIM. Cupo de 10 por sesión, inscríbete.">
-<meta property="og:image" content="https://TU-USUARIO.github.io/TU-REPO/og-image.png">
+<meta property="og:description" content="Lun 19, mar 20 o mié 21 de octubre · 11:00 a 12:00 · Aula LSIM. Cupo de 10 por sesión, inscríbete.">
+<meta property="og:image" content="https://mparra37.github.io/Asesorias/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#0E1B2C">
@@ -31,6 +32,8 @@
     --ok: #1D7A4B;
     --error: #B42318;
     --focus: #1F5FA8;
+    --kw: #1F5FA8;
+    --str: #1D7A4B;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -46,6 +49,8 @@
       --ok: #5BD39A;
       --error: #FF8A80;
       --focus: #8AB4F8;
+      --kw: #8AB4F8;
+      --str: #5BD39A;
       color-scheme: dark;
     }
   }
@@ -96,7 +101,7 @@
   .btn svg { width: 20px; height: 20px; }
 
   /* Datos clave */
-  .facts { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .facts { margin: 0; display: grid; border-top: 1px solid var(--line); }
   .facts div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .facts dt { font-weight: 700; color: var(--muted); font-size: 15px; padding-top: 2px; }
   .facts dd { margin: 0; font-weight: 600; }
@@ -106,22 +111,23 @@
   h2 { font-size: 26px; font-weight: 750; letter-spacing: -.01em; }
   h2 + p { margin-top: 8px; }
 
-  .puntos {
-    background: var(--accent); color: var(--on-accent);
-    border-radius: 18px; padding: 22px 22px 24px;
-  }
+  .puntos { background: var(--accent); color: var(--on-accent); border-radius: 18px; padding: 22px 22px 24px; }
   .puntos h2 { font-size: 23px; }
   .puntos p { margin-top: 8px; }
 
-  .tips { list-style: none; counter-reset: tip; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; }
-  .tips li { counter-increment: tip; display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
-  .tips li::before {
-    content: counter(tip); width: 32px; height: 32px; border-radius: 50%;
-    display: grid; place-items: center; font-weight: 700; font-size: 15px;
+  /* Prueba de código */
+  pre {
+    margin: 16px 0 0; padding: 16px 18px; border-radius: 14px; overflow-x: auto;
     background: var(--surface); border: 1px solid var(--line);
+    font: 14.5px/1.6 ui-monospace, Consolas, "Cascadia Mono", Menlo, monospace;
   }
-  .tips b { display: block; }
-  .tips span { color: var(--muted); }
+  pre .k { color: var(--kw); font-weight: 700; }
+  pre .s { color: var(--str); }
+  pre .f { font-weight: 700; }
+  .veredicto { margin-top: 14px; }
+  details { margin-top: 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; }
+  summary { min-height: 48px; padding: 12px 16px; cursor: pointer; font-weight: 650; }
+  details p { padding: 0 16px 14px; }
 
   /* Formulario */
   form { margin-top: 22px; display: grid; gap: 22px; }
@@ -130,7 +136,7 @@
   .opt { font-weight: 400; color: var(--muted); }
   .hint { color: var(--muted); font-size: 15px; margin: -4px 0 8px; }
 
-  input[type=text], select, textarea {
+  input[type=text], textarea {
     width: 100%; min-height: 48px; padding: 10px 14px;
     font: inherit; color: var(--text); background: var(--bg);
     border: 1.5px solid var(--line-strong); border-radius: 10px;
@@ -152,10 +158,9 @@
   .slot b { font-weight: 650; }
   .slot small { display: block; color: var(--muted); font-size: 15px; }
   .cupo { font-size: 15px; font-weight: 650; color: var(--muted); white-space: nowrap; }
-  .slot.pocos .cupo { color: var(--text); background: var(--accent); color: var(--on-accent); padding: 3px 10px; border-radius: 999px; }
+  .slot.pocos .cupo { background: var(--accent); color: var(--on-accent); padding: 3px 10px; border-radius: 999px; }
   .slot.off { cursor: not-allowed; border-style: dashed; border-color: var(--line); }
-  .slot.off b, .slot.off small { color: var(--muted); }
-  .slot.off .cupo { color: var(--muted); }
+  .slot.off b, .slot.off small, .slot.off .cupo { color: var(--muted); }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { position: relative; }
@@ -166,6 +171,8 @@
   }
   .chip input:checked + span { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
   .chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .nota { margin-top: 10px; font-size: 15px; color: var(--muted); }
+  .nota:empty { display: none; }
 
   .estado { font-weight: 600; }
   .estado.mal { color: var(--error); }
@@ -175,9 +182,8 @@
   .exito:focus { outline: none; }
   .exito h3 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
   .exito h3 svg { width: 28px; height: 28px; flex: none; color: var(--ok); }
-  .exito ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-  .exito li { padding: 12px 14px; background: var(--surface); border-radius: 10px; }
-  .exito li a { font-size: 15px; font-weight: 600; }
+  .exito .cita { margin-top: 14px; padding: 12px 14px; background: var(--surface); border-radius: 10px; }
+  .exito .cita a { font-size: 15px; font-weight: 600; }
   .exito .actions { margin-top: 18px; }
   .linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; min-height: 44px; }
 
@@ -215,25 +221,40 @@
   </header>
 
   <dl class="facts">
-    <div><dt>Cuándo</dt><dd>Lunes 19, martes 20 y miércoles 21 de octubre<span>11:00 a 12:00 · ven el día que te acomode</span></dd></div>
+    <div><dt>Cuándo</dt><dd>Lunes 19, martes 20 o miércoles 21 de octubre<span>11:00 a 12:00 · elige el día que te acomode</span></dd></div>
     <div><dt>Dónde</dt><dd>Aula LSIM<span>Primer piso PEI · laboratorio de computadoras</span></dd></div>
     <div><dt>Cupo</dt><dd>10 estudiantes por sesión<span>Inscripción obligatoria</span></dd></div>
   </dl>
 
   <section class="puntos" aria-labelledby="t-puntos">
-    <h2 id="t-puntos">Asistir te da puntos de apoyo para el examen</h2>
-    <p>Los puntos cuentan por asistencia: se pasa lista en el aula. Inscribirte no basta, hay que ir.</p>
+    <h2 id="t-puntos">Asistir te puede dar puntos de apoyo para el examen</h2>
+    <p>Nada asegurado 😉, pero vale la pena: llegas al examen con tus dudas resueltas.</p>
   </section>
 
-  <section aria-labelledby="t-mano">
-    <h2 id="t-mano">El examen es a mano</h2>
-    <p class="muted">Aunque la asesoría es en laboratorio, practica como en el examen.</p>
-    <ol class="tips">
-      <li><div><b>Trae cuaderno y lápiz.</b><span>Practicarás en papel, igual que el día del examen.</span></div></li>
-      <li><div><b>Escribe el código sin computadora.</b><span>Cuida la sangría, los dos puntos y los paréntesis.</span></div></li>
-      <li><div><b>Haz pruebas de escritorio.</b><span>Sigue el programa línea por línea y anota cómo cambian las variables.</span></div></li>
-      <li><div><b>Llega con una duda concreta.</b><span>Un ejercicio que no te salió rinde más que empezar de cero.</span></div></li>
-    </ol>
+  <section aria-labelledby="t-prueba">
+    <h2 id="t-prueba">¿Necesito asesoría?</h2>
+    <p class="muted">Reto rápido: una función que diga si un triángulo es equilátero, isósceles o escaleno.</p>
+<pre><code><span class="k">def</span> <span class="f">tipo_triangulo</span>(a, b, c):
+    <span class="k">if</span> a == b <span class="k">and</span> b == c:
+        <span class="k">return</span> <span class="s">"equilátero"</span>
+    <span class="k">elif</span> a == b <span class="k">or</span> b == c <span class="k">or</span> a == c:
+        <span class="k">return</span> <span class="s">"isósceles"</span>
+    <span class="k">else</span>:
+        <span class="k">return</span> <span class="s">"escaleno"</span>
+
+<span class="k">def</span> <span class="f">main</span>():
+    a = int(input(<span class="s">"Lado 1: "</span>))
+    b = int(input(<span class="s">"Lado 2: "</span>))
+    c = int(input(<span class="s">"Lado 3: "</span>))
+    tipo = tipo_triangulo(a, b, c)
+    print(<span class="s">"Es un triángulo"</span>, tipo)
+
+main()</code></pre>
+    <p class="veredicto">Si no sabrías cómo hacer esto, o al leerlo sentiste que estaba escrito en élfico 🧝, <b>sí necesitas asesoría</b>.</p>
+    <details>
+      <summary>Bonus: ¿qué imprime si escribes 5, 5 y 8?</summary>
+      <p><b>Es un triángulo isósceles.</b> Si atinaste sin correrlo, vas bien. Si no, ya sabes dónde encontrarnos.</p>
+    </details>
   </section>
 
   <section id="inscripcion" aria-labelledby="t-inscripcion">
@@ -241,11 +262,11 @@
     <p class="muted">Toma menos de un minuto. Cuando un día se llena, ya no se puede elegir.</p>
 
     <form id="form" novalidate>
-      <fieldset aria-describedby="e-sesiones">
-        <legend>¿Qué día vas a ir? <span class="opt">Puedes elegir más de uno</span></legend>
+      <fieldset aria-describedby="e-sesion">
+        <legend>¿Qué día vas a ir? <span class="opt">Elige solo uno</span></legend>
         <div class="slots" id="slots"></div>
-        <p class="hint" id="aviso-cupos" hidden style="margin:10px 0 0">No pudimos consultar los lugares disponibles. Igual puedes inscribirte y te avisamos si un día ya está lleno.</p>
-        <p class="error" id="e-sesiones"></p>
+        <p class="hint" id="aviso-cupos" hidden style="margin:10px 0 0">No pudimos consultar los lugares disponibles. Igual puedes inscribirte y te avisamos si el día ya está lleno.</p>
+        <p class="error" id="e-sesion"></p>
       </fieldset>
 
       <div>
@@ -261,15 +282,10 @@
         <p class="error" id="e-matricula"></p>
       </div>
 
-      <div>
-        <label class="lbl" for="grupo">Grupo</label>
-        <select id="grupo" name="grupo" aria-describedby="e-grupo"><option value="">Elige tu grupo</option></select>
-        <p class="error" id="e-grupo"></p>
-      </div>
-
       <fieldset>
         <legend>¿En qué tema necesitas ayuda? <span class="opt">Opcional</span></legend>
         <div class="chips" id="temas"></div>
+        <p class="nota" id="nota-temas" aria-live="polite"></p>
       </fieldset>
 
       <div>
@@ -283,8 +299,8 @@
 
     <div class="exito" id="exito" tabindex="-1" hidden>
       <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><span id="exito-titulo">¡Listo, ya tienes lugar!</span></h3>
-      <ul id="exito-lista"></ul>
-      <p style="margin-top:14px">Aula LSIM, primer piso PEI. Trae cuaderno y lápiz.</p>
+      <div class="cita"><b id="exito-dia"></b> · 11:00 a 12:00<br><a id="exito-gcal" target="_blank" rel="noopener">Agregar a Google Calendar</a></div>
+      <p style="margin-top:14px">Aula LSIM, primer piso PEI. Trae tu código o el ejercicio que no te sale.</p>
       <div class="actions">
         <button class="btn" type="button" id="ics">Agregar a mi calendario</button>
         <button class="btn" type="button" data-compartir>Compartir con mi grupo</button>
@@ -297,7 +313,6 @@
 <footer>
   <p>¿Te inscribiste y ya no puedes ir? Avísale a tu docente para liberar tu lugar.</p>
   <div class="actions">
-    <a class="btn" id="whatsapp" target="_blank" rel="noopener">Enviar por WhatsApp</a>
     <button class="btn" type="button" id="ver-qr">Mostrar código QR</button>
   </div>
 </footer>
@@ -311,14 +326,22 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
 <script>
   /* ================= Configuración ================= */
   const CONFIG = {
     // URL de la aplicación web de Apps Script (termina en /exec). Vacía = modo demostración.
     API_URL: 'https://script.google.com/macros/s/AKfycbz9h2dXVghyF95UxKNr3pDEWZe0UTeoWnFzVXOqFu1o7S9qvsf2OvzwXX0Tjt6qjxmbqA/exec',
+    // Dirección pública del sitio: es la que van en el QR y al compartir.
+    SITIO_URL: 'https://mparra37.github.io/Asesorias/',
     CUPO: 10,
-    GRUPOS: ['Grupo 1', 'Grupo 2', 'Grupo 3', 'Grupo 4'],
-    TEMAS: ['Funciones', 'Condicionales', 'Ciclo for', 'Ciclo while', 'Ciclos anidados', 'Listas', 'Tuplas y diccionarios', 'Pruebas de escritorio'],
+    TEMAS: ['TODO 😵', 'Funciones', 'Condicionales', 'Ciclos for y while', 'Listas', 'Tuplas y diccionarios', 'Problemas del corazón 💔'],
+  };
+
+  // Mensaje que aparece al marcar ciertos temas.
+  const NOTAS = {
+    'TODO 😵': 'Respira, para eso estamos.',
+    'Problemas del corazón 💔': 'Aquí no te ayudamos con eso… pero un ciclo infinito sí te lo arreglamos.',
   };
 
   // Mismos id que en el backend. Hora del centro de México (UTC-6).
@@ -328,8 +351,7 @@
     { id: 'mie', dia: 'Miércoles', fecha: '21 de octubre', inicio: '2026-10-21T11:00:00-06:00', fin: '2026-10-21T12:00:00-06:00' },
   ];
   const LUGAR = 'Aula LSIM, primer piso PEI (laboratorio de computadoras)';
-  const MENSAJE = 'Asesorías de Programación rumbo al examen: lun 19, mar 20 y mié 21 de octubre, 11:00 a 12:00 en el Aula LSIM. Cupo de 10 por sesión, inscríbete aquí:';
-  const QR_LIB = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+  const MENSAJE = 'Asesorías de Programación rumbo al examen: lun 19, mar 20 o mié 21 de octubre, 11:00 a 12:00 en el Aula LSIM. Cupo de 10 por sesión, inscríbete aquí:';
 
   /* ================= Utilidades ================= */
   const DEMO = !CONFIG.API_URL;
@@ -338,7 +360,7 @@
   ];
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
-  const urlSitio = () => location.href.split('#')[0].split('?')[0];
+  const urlSitio = () => CONFIG.SITIO_URL || location.href.split('#')[0].split('?')[0];
   const form = $('#form');
 
   function avisar(texto) {
@@ -348,17 +370,19 @@
     avisar.timer = setTimeout(() => (t.textContent = ''), 3500);
   }
 
-  /* ================= Días y lugares ================= */
+  /* ================= Días, lugares y temas ================= */
   $('#slots').innerHTML = SESIONES.map(s => `
     <label class="slot" data-id="${s.id}">
-      <input type="checkbox" name="sesiones" value="${s.id}">
+      <input type="radio" name="sesion" value="${s.id}">
       <span><b>${s.dia} ${s.fecha.split(' ')[0]}</b><small>${s.fecha.replace(/^\d+ de /, '')} · 11:00 a 12:00</small></span>
       <span class="cupo"></span>
     </label>`).join('');
 
-  $('#grupo').insertAdjacentHTML('beforeend', CONFIG.GRUPOS.map(g => `<option>${g}</option>`).join(''));
   $('#temas').innerHTML = CONFIG.TEMAS.map(t =>
     `<label class="chip"><input type="checkbox" name="temas" value="${t}"><span>${t}</span></label>`).join('');
+  $('#temas').addEventListener('change', () => {
+    $('#nota-temas').textContent = $$('input[name=temas]:checked').map(i => NOTAS[i.value]).filter(Boolean).join(' ');
+  });
 
   function pintarCupos(lista) {
     const porId = Object.fromEntries((lista || []).map(s => [s.id, s]));
@@ -396,20 +420,18 @@
   }
 
   /* ================= Validación ================= */
-  const seleccionadas = () => $$('input[name=sesiones]:checked').map(i => i.value);
+  const elegida = () => $('input[name=sesion]:checked')?.value || '';
   const REGLAS = {
-    sesiones: () => seleccionadas().length ? '' : 'Elige al menos un día.',
+    sesion: () => elegida() ? '' : 'Elige un día.',
     nombre: () => $('#nombre').value.trim().length >= 3 ? '' : 'Escribe tu nombre completo.',
     matricula: () => /^A\d{8}$/i.test($('#matricula').value.trim()) ? '' : 'Escribe tu matrícula completa, por ejemplo A01234567.',
-    grupo: () => $('#grupo').value ? '' : 'Elige tu grupo.',
   };
   let intentoEnviar = false;
 
   function validar(campo) {
     const msg = REGLAS[campo]();
     $(`#e-${campo}`).textContent = msg;
-    const control = campo === 'sesiones' ? null : $(`#${campo}`);
-    if (control) control.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (campo !== 'sesion') $(`#${campo}`).setAttribute('aria-invalid', msg ? 'true' : 'false');
     return !msg;
   }
 
@@ -417,17 +439,17 @@
     let primero = null;
     for (const campo of Object.keys(REGLAS)) {
       if (!validar(campo) && !primero) {
-        primero = campo === 'sesiones' ? $('input[name=sesiones]:not(:disabled)') || $('#slots') : $(`#${campo}`);
+        primero = campo === 'sesion' ? $('input[name=sesion]:not(:disabled)') || $('#slots') : $(`#${campo}`);
       }
     }
     return primero;
   }
 
   // Se valida al salir del campo solo después del primer intento, para no regañar antes de tiempo.
-  ['nombre', 'matricula', 'grupo'].forEach(campo => {
-    $(`#${campo}`).addEventListener(campo === 'grupo' ? 'change' : 'blur', () => intentoEnviar && validar(campo));
+  ['nombre', 'matricula'].forEach(campo => {
+    $(`#${campo}`).addEventListener('blur', () => intentoEnviar && validar(campo));
   });
-  $('#slots').addEventListener('change', () => intentoEnviar && validar('sesiones'));
+  $('#slots').addEventListener('change', () => intentoEnviar && validar('sesion'));
   $('#matricula').addEventListener('blur', e => (e.target.value = e.target.value.trim().toUpperCase()));
 
   /* ================= Envío ================= */
@@ -442,10 +464,9 @@
     if (invalido) { invalido.focus(); return; }
 
     const datos = {
-      sesiones: seleccionadas(),
+      sesion: elegida(),
       nombre: $('#nombre').value.trim(),
       matricula: $('#matricula').value.trim().toUpperCase(),
-      grupo: $('#grupo').value,
       temas: $$('input[name=temas]:checked').map(i => i.value),
       duda: $('#duda').value.trim(),
     };
@@ -478,7 +499,8 @@
   });
 
   /* ================= Confirmación y calendario ================= */
-  let ultimas = [];
+  let ultima = null;
+  const DETALLE = 'Trae tu código o el ejercicio que no te sale.';
   const utc = iso => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 
   function linkGoogle(s) {
@@ -487,22 +509,16 @@
       text: 'Asesoría de Programación',
       dates: `${utc(s.inicio)}/${utc(s.fin)}`,
       location: LUGAR,
-      details: 'Trae cuaderno, lápiz y tu duda concreta. El examen es a mano.',
+      details: DETALLE,
     });
     return `https://calendar.google.com/calendar/render?${p}`;
   }
 
   function mostrarExito(datos) {
-    ultimas = SESIONES.filter(s => datos.sesiones.includes(s.id));
+    ultima = SESIONES.find(s => s.id === datos.sesion);
     $('#exito-titulo').textContent = `¡Listo, ${datos.nombre.split(/\s+/)[0]}! Ya tienes lugar`;
-    const lista = $('#exito-lista');
-    lista.innerHTML = '';
-    ultimas.forEach(s => {
-      const li = document.createElement('li');
-      li.innerHTML = `<b>${s.dia} ${s.fecha}</b> · 11:00 a 12:00<br><a target="_blank" rel="noopener">Agregar a Google Calendar</a>`;
-      li.querySelector('a').href = linkGoogle(s);
-      lista.append(li);
-    });
+    $('#exito-dia').textContent = `${ultima.dia} ${ultima.fecha}`;
+    $('#exito-gcal').href = linkGoogle(ultima);
     form.hidden = true;
     $('#exito').hidden = false;
     $('#exito').focus();
@@ -511,22 +527,21 @@
 
   $('#ics').addEventListener('click', () => {
     const esc = t => t.replace(/[\\,;]/g, m => '\\' + m);
-    const ahora = utc(new Date().toISOString());
-    const eventos = ultimas.map(s => [
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Asesorias Programacion//ES',
       'BEGIN:VEVENT',
-      `UID:asesoria-${s.id}-2026@asesorias-programacion`,
-      `DTSTAMP:${ahora}`,
-      `DTSTART:${utc(s.inicio)}`,
-      `DTEND:${utc(s.fin)}`,
+      `UID:asesoria-${ultima.id}-2026@asesorias-programacion`,
+      `DTSTAMP:${utc(new Date().toISOString())}`,
+      `DTSTART:${utc(ultima.inicio)}`,
+      `DTEND:${utc(ultima.fin)}`,
       'SUMMARY:Asesoría de Programación',
       `LOCATION:${esc(LUGAR)}`,
-      `DESCRIPTION:${esc('Trae cuaderno, lápiz y tu duda concreta. El examen es a mano.')}`,
-      'END:VEVENT',
-    ].join('\r\n'));
-    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Asesorias Programacion//ES', ...eventos, 'END:VCALENDAR'].join('\r\n');
+      `DESCRIPTION:${esc(DETALLE)}`,
+      'END:VEVENT', 'END:VCALENDAR',
+    ].join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    a.download = 'asesorias-programacion.ics';
+    a.download = 'asesoria-programacion.ics';
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
@@ -537,12 +552,13 @@
     $$('.error').forEach(p => (p.textContent = ''));
     $$('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
     $('#estado').textContent = '';
+    $('#nota-temas').textContent = '';
     $('#exito').hidden = true;
     form.hidden = false;
-    consultarCupos().then(() => $('input[name=sesiones]:not(:disabled)')?.focus());
+    consultarCupos().then(() => $('input[name=sesion]:not(:disabled)')?.focus());
   });
 
-  /* ================= Compartir ================= */
+  /* ================= Compartir y QR ================= */
   async function compartir() {
     const url = urlSitio();
     if (navigator.share) {
@@ -557,28 +573,18 @@
     }
   }
   $$('[data-compartir]').forEach(b => b.addEventListener('click', compartir));
-  $('#whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(`${MENSAJE} ${urlSitio()}`);
 
-  function cargarScript(src) {
-    return new Promise((ok, mal) => {
-      const s = document.createElement('script');
-      s.src = src; s.onload = ok; s.onerror = mal;
-      document.head.append(s);
-    });
-  }
-
-  $('#ver-qr').addEventListener('click', async () => {
+  $('#ver-qr').addEventListener('click', () => {
     const url = urlSitio();
-    try {
-      if (!window.qrcode) await cargarScript(QR_LIB);
+    $('#qr-url').textContent = url;
+    if (window.qrcode) {
       const qr = qrcode(0, 'M');
       qr.addData(url);
       qr.make();
       $('#qr').innerHTML = `<img alt="Código QR del sitio de inscripción" src="${qr.createDataURL(10, 0)}">`;
-    } catch (e) {
-      $('#qr').textContent = 'No se pudo generar el código QR.';
+    } else {
+      $('#qr').textContent = 'No se pudo cargar el generador de QR. Revisa tu conexión y recarga la página.';
     }
-    $('#qr-url').textContent = url;
     $('#dialogo-qr').showModal();
   });
 
