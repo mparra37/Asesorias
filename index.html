@@ -278,7 +278,7 @@ main()</code></pre>
       <div>
         <label class="lbl" for="matricula">Matrícula</label>
         <p class="hint" id="h-matricula">Ejemplo: A01234567</p>
-        <input type="text" id="matricula" name="matricula" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9" aria-describedby="h-matricula e-matricula">
+        <input type="text" id="matricula" name="matricula" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30" aria-describedby="h-matricula e-matricula">
         <p class="error" id="e-matricula"></p>
       </div>
 
@@ -424,7 +424,7 @@ main()</code></pre>
   const REGLAS = {
     sesion: () => elegida() ? '' : 'Elige un día.',
     nombre: () => $('#nombre').value.trim().length >= 3 ? '' : 'Escribe tu nombre completo.',
-    matricula: () => /^A\d{8}$/i.test($('#matricula').value.trim()) ? '' : 'Escribe tu matrícula completa, por ejemplo A01234567.',
+    matricula: () => $('#matricula').value.trim() ? '' : 'Escribe tu matrícula.',
   };
   let intentoEnviar = false;
 

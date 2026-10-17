@@ -99,7 +99,7 @@ function validar(d) {
   if (!d || typeof d !== 'object') return 'Inscripción incompleta.';
   if (!SESIONES.some(s => s.id === d.sesion)) return 'Elige un día.';
   if (typeof d.nombre !== 'string' || d.nombre.trim().length < 3 || d.nombre.length > 80) return 'Escribe tu nombre completo.';
-  if (typeof d.matricula !== 'string' || !/^A\d{8}$/i.test(d.matricula.trim())) return 'Revisa tu matrícula (ejemplo: A01234567).';
+  if (typeof d.matricula !== 'string' || !d.matricula.trim() || d.matricula.length > 30) return 'Escribe tu matrícula.';
   if (d.temas && (!Array.isArray(d.temas) || d.temas.length > 12 || d.temas.some(t => typeof t !== 'string' || t.length > 60))) return 'Revisa los temas.';
   if (d.duda && (typeof d.duda !== 'string' || d.duda.length > 500)) return 'La duda es demasiado larga (máximo 500 caracteres).';
   return '';
