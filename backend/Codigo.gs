@@ -1,7 +1,7 @@
 /**
  * Backend · Asesorías de Programación
  *
- * Guarda las inscripciones en una hoja de Google y no deja pasar del CUPO.
+ * Guarda las inscripciones en una hoja de Google y no deja pasar del cupo de cada día.
  * El sitio (index.html) lo consulta para mostrar cuántos lugares quedan.
  *
  * Instalación (una sola vez):
@@ -18,13 +18,11 @@
  * editar (lápiz) → Versión: "Nueva versión". Así la URL sigue siendo la misma.
  */
 
-const CUPO = 10;
-
-// Mismos id que SESIONES en index.html. "inicio" cierra la inscripción de ese día.
+// Mismos id que SESIONES en index.html. La inscripción de cada día se cierra en "cierre".
 const SESIONES = [
-  { id: 'lun', nombre: 'Lunes 19 de octubre', inicio: '2026-10-19T11:00:00-06:00' },
-  { id: 'mar', nombre: 'Martes 20 de octubre', inicio: '2026-10-20T11:00:00-06:00' },
-  { id: 'mie', nombre: 'Miércoles 21 de octubre', inicio: '2026-10-21T11:00:00-06:00' },
+  { id: 'lun', nombre: 'Lunes 19 de octubre', cupo: 10, cierre: '2026-10-19T23:59:59-06:00' },
+  { id: 'mar', nombre: 'Martes 20 de octubre', cupo: 10, cierre: '2026-10-20T23:59:59-06:00' },
+  { id: 'mie', nombre: 'Miércoles 21 de octubre', cupo: 15, cierre: '2026-10-21T23:59:59-06:00' },
 ];
 
 const ENCABEZADOS = ['Registro', 'Sesión', 'Nombre', 'Matrícula', 'Temas', 'Duda', 'Asistió'];
@@ -41,7 +39,7 @@ function configurar() {
 
 function doGet() {
   try {
-    return responder({ ok: true, cupo: CUPO, sesiones: estado(leerFilas(obtenerHoja())) });
+    return responder({ ok: true, sesiones: estado(leerFilas(obtenerHoja())) });
   } catch (err) {
     return responder({ ok: false, error: err.message });
   }
@@ -72,9 +70,9 @@ function doPost(e) {
 
     // Cada estudiante aparta un solo día.
     const rechazo =
-      Date.now() >= Date.parse(s.inicio) ? `La sesión del ${s.nombre} ya cerró.` :
+      Date.now() >= Date.parse(s.cierre) ? `La sesión del ${s.nombre} ya cerró.` :
       previa ? `Ya tienes lugar el ${previa.sesion}. Solo se puede apartar un día.` :
-      contar(filas, s.nombre) >= CUPO ? `La sesión del ${s.nombre} se acaba de llenar. Elige otro día.` :
+      contar(filas, s.nombre) >= s.cupo ? `La sesión del ${s.nombre} se acaba de llenar. Elige otro día.` :
       '';
     if (rechazo) return responder({ ok: false, error: rechazo, sesiones: estado(filas) });
 
@@ -137,8 +135,8 @@ function estado(filas) {
     return {
       id: s.id,
       inscritos,
-      disponibles: Math.max(0, CUPO - inscritos),
-      cerrada: ahora >= Date.parse(s.inicio),
+      disponibles: Math.max(0, s.cupo - inscritos),
+      cerrada: ahora >= Date.parse(s.cierre),
     };
   });
 }

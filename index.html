@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asesorías de Programación</title>
-<meta name="description" content="Asesorías rumbo al examen: lunes 19, martes 20 o miércoles 21 de octubre, 11:00 a 12:00, Aula LSIM. Cupo de 10 por sesión.">
+<meta name="description" content="Asesorías rumbo al examen: lunes 19, martes 20 o miércoles 21 de octubre, 11:00 a 12:00, Aula LSIM. Cupo de 10 por sesión, 15 el miércoles.">
 
 <!-- Vista previa al compartir (WhatsApp, Teams) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mparra37.github.io/Asesorias/">
 <meta property="og:title" content="Asesorías de Programación · Rumbo al examen">
-<meta property="og:description" content="Lun 19, mar 20 o mié 21 de octubre · 11:00 a 12:00 · Aula LSIM. Cupo de 10 por sesión, inscríbete.">
+<meta property="og:description" content="Lun 19, mar 20 o mié 21 de octubre · 11:00 a 12:00 · Aula LSIM. Cupo de 10 por sesión (15 el miércoles), inscríbete.">
 <meta property="og:image" content="https://mparra37.github.io/Asesorias/flyer-asesorias.png">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1350">
@@ -227,7 +227,7 @@
   <dl class="facts">
     <div><dt>Cuándo</dt><dd>Lunes 19, martes 20 o miércoles 21 de octubre<span>11:00 a 12:00 · elige el día que te acomode</span></dd></div>
     <div><dt>Dónde</dt><dd>Aula LSIM<span>Primer piso PEI · laboratorio de computadoras</span></dd></div>
-    <div><dt>Cupo</dt><dd>10 estudiantes por sesión<span>Inscripción obligatoria</span></dd></div>
+    <div><dt>Cupo</dt><dd>10 estudiantes por sesión, 15 el miércoles<span>Inscripción obligatoria</span></dd></div>
   </dl>
 
   <section class="puntos" aria-labelledby="t-puntos">
@@ -350,7 +350,6 @@ main()</code></pre>
     API_URL: 'https://script.google.com/macros/s/AKfycbzlGe754QOR_QNACW1apvx2-rRU2utyioV1nJWke1soLzhDc6yHLaHmEbAtRhOpm3RozQ/exec',
     // Dirección pública del sitio: es la que van en el QR y al compartir.
     SITIO_URL: 'https://mparra37.github.io/Asesorias/',
-    CUPO: 10,
     TEMAS: ['TODO 😵', 'Funciones', 'Condicionales', 'Ciclos for y while', 'Listas', 'Tuplas y diccionarios', 'Problemas del corazón 💔'],
   };
 
@@ -360,15 +359,15 @@ main()</code></pre>
     'Problemas del corazón 💔': 'Aquí no te ayudamos con eso… pero un ciclo infinito sí te lo arreglamos.',
   };
 
-  // Mismos id que en el backend. Hora del centro de México (UTC-6).
+  // Mismos id que en el backend. Hora del centro de México (UTC-6). La inscripción cierra en "cierre".
   const SESIONES = [
-    { id: 'lun', dia: 'Lunes', fecha: '19 de octubre', inicio: '2026-10-19T11:00:00-06:00', fin: '2026-10-19T12:00:00-06:00' },
-    { id: 'mar', dia: 'Martes', fecha: '20 de octubre', inicio: '2026-10-20T11:00:00-06:00', fin: '2026-10-20T12:00:00-06:00' },
-    { id: 'mie', dia: 'Miércoles', fecha: '21 de octubre', inicio: '2026-10-21T11:00:00-06:00', fin: '2026-10-21T12:00:00-06:00' },
+    { id: 'lun', dia: 'Lunes', fecha: '19 de octubre', inicio: '2026-10-19T11:00:00-06:00', fin: '2026-10-19T12:00:00-06:00', cierre: '2026-10-19T23:59:59-06:00' },
+    { id: 'mar', dia: 'Martes', fecha: '20 de octubre', inicio: '2026-10-20T11:00:00-06:00', fin: '2026-10-20T12:00:00-06:00', cierre: '2026-10-20T23:59:59-06:00' },
+    { id: 'mie', dia: 'Miércoles', fecha: '21 de octubre', inicio: '2026-10-21T11:00:00-06:00', fin: '2026-10-21T12:00:00-06:00', cierre: '2026-10-21T23:59:59-06:00' },
   ];
   const LUGAR = 'Aula LSIM, primer piso PEI (laboratorio de computadoras)';
   // Mensaje listo para pegar en WhatsApp o Teams (la URL se agrega al final).
-  const MENSAJE = 'Asesorías de programación para el examen: lunes 19, martes 20 y miércoles 21, de 11 a 12 en el LSIM. Hay 10 lugares por día, apártalo aquí:';
+  const MENSAJE = 'Asesorías de programación para el examen: lunes 19, martes 20 y miércoles 21, de 11 a 12 en el LSIM. Hay 10 lugares por día (15 el miércoles), apártalo aquí:';
 
   /* ================= Utilidades ================= */
   const DEMO = !CONFIG.API_URL;
@@ -407,7 +406,7 @@ main()</code></pre>
       const slot = $(`.slot[data-id="${s.id}"]`);
       const input = slot.querySelector('input');
       const info = porId[s.id];
-      const cerrada = Date.now() >= Date.parse(s.inicio) || (info && info.cerrada);
+      const cerrada = Date.now() >= Date.parse(s.cierre) || (info && info.cerrada);
       const n = info ? info.disponibles : null;
       let texto = '', clase = '';
       if (cerrada) { texto = 'Cerrada'; clase = 'off'; }
